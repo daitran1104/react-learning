@@ -4,8 +4,7 @@ import SideBar from './SideBar';
 import PostForm from './PostForm';
 import PostDetail from './PostDetail';
 
-class RootApp extends React.Component
-{
+class RootApp extends React.Component {
     state = {
         isShowForm: true,
         posts: [],
