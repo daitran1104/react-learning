@@ -4,13 +4,13 @@ class PostForm extends React.Component
 {
     render()
     {
-        const {inputTitle, inputContent, onChangeTitle, onChangeContent, onSubmit} = this.props;
+        const {inputForm, onChangeForm, onSubmit} = this.props;
         return (
             <form onSubmit={onSubmit}>
                 <label>Title</label><br/>
-                <input type="text" value={inputTitle} onChange={onChangeTitle}/><br/>
+                <input type="text" value={inputForm.title} onChange={onChangeForm.bind(this, 'title')}/><br/>
                 <label>Content</label><br/>
-                <textarea rows="4" cols="50" value={inputContent} onChange={onChangeContent}></textarea><br/>
+                <textarea rows="4" cols="50" value={inputForm.content} onChange={onChangeForm.bind(this, 'content')}></textarea><br/>
                 <button>POST</button>
             </form>
         );
@@ -18,10 +18,8 @@ class PostForm extends React.Component
 }
 
 PostForm.propTypes = {
-    inputTitle: PropTypes.string.isRequired,
-    inputContent: PropTypes.string.isRequired,
-    onChangeTitle: PropTypes.func.isRequired,
-    onChangeContent: PropTypes.func.isRequired,
+    inputForm: PropTypes.object.isRequired,
+    onChangeForm: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired
 };
 

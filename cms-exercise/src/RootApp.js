@@ -14,12 +14,19 @@ class RootApp extends React.Component {
         inputContent: ''
     }
 
-    handleTitleChange(event) {
-        this.setState({ inputTitle: event.target.value});
-    }
+    // handleTitleChange(event) {
+    //     this.setState({ inputTitle: event.target.value});
+    // }
 
-    handleContentChange(event) {
-        this.setState({ inputContent: event.target.value });
+    // handleContentChange(event) {
+    //     this.setState({ inputContent: event.target.value });
+    // }
+
+    handleChangeElement(field, event) {
+        let form = Object.assign({}, this.state.form, {
+            [field]: event.target.value
+        });
+        this.setState({form: form});
     }
 
     handleSubmitPostForm(event) {
@@ -28,16 +35,15 @@ class RootApp extends React.Component {
 
         posts.push({
             id:posts.length + 1,
-            title: this.state.inputTitle,
-            content: this.state.inputContent
+            title: this.state.form.title,
+            content: this.state.form.content
         });
 
         this.setState({
             posts: posts,
-            inputTitle: '',
-            inputContent: ''
+            form: {}
         });
-
+        console.log(posts);
     }
 
     handleClickCreatePost(event) {
@@ -67,10 +73,8 @@ class RootApp extends React.Component {
 
                {!this.state.isShowForm && this.state.post ? (
                 <PostDetail data={this.state.post}/>
-                ) : <PostForm inputTitle = {this.state.inputTitle}
-                   inputContent = {this.state.inputContent}
-                   onChangeTitle = {this.handleTitleChange.bind(this)}
-                   onChangeContent = {this.handleContentChange.bind(this)} 
+                ) : <PostForm inputForm = {this.state.form}
+                   onChangeForm = {this.handleChangeElement.bind(this)}
                    onSubmit = {this.handleSubmitPostForm.bind(this)} />
                }
             </div>
